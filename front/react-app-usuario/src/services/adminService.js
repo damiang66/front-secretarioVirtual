@@ -19,3 +19,10 @@ export const clienteFindAll = async()=>{
         throw error;
     }
 }
+export const crearAgenda = async(dispobilidades)=>{
+    try {
+        return await axios.post(`${BASE_URL}/crear-agenda`,dispobilidades)
+    } catch (error) {
+        throw error;
+    }
+}
