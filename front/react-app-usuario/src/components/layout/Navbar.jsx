@@ -18,7 +18,12 @@ export const Navbar = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/users">
-                                clientes
+                                Clientes
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/disponibilidad">
+                                Disponibilidad
                             </NavLink>
                         </li>
                         {!login.isAdmin ||
