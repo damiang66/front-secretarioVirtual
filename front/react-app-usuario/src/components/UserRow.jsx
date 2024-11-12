@@ -5,14 +5,16 @@ import { NavLink } from "react-router-dom"
 import { useUsers } from "../hooks/useUsers";
 import { useAuth } from "../auth/hooks/useAuth";
 
-export const UserRow = ({ id, username, email, admin }) => {
+export const UserRow = ({ id, nombre,apellido, email, fechaCreacion }) => {
     const { handlerUserSelectedForm, handlerRemoveUser } = useUsers();
     const { login } = useAuth();;
     return (
         <tr>
             <td>{id}</td>
-            <td>{username}</td>
+            <td>{nombre}</td>
+            <td>{apellido}</td>
             <td>{email}</td>
+            <td>{fechaCreacion}</td>
 
             {!login.isAdmin ||
                 <>

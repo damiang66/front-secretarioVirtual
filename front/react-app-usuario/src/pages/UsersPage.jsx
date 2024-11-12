@@ -1,9 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserModalForm } from "../components/UserModalForm";
 import { UsersList } from "../components/UsersList";
 
 import { useUsers } from "../hooks/useUsers";
 import { useAuth } from "../auth/hooks/useAuth";
+import { clienteFindAll } from "../services/adminService";
 
 export const UsersPage = () => {
 
@@ -14,19 +15,25 @@ export const UsersPage = () => {
         getUsers,
     } = useUsers();
 
+const[cliente,setCliente]=useState([])
     const { login } = useAuth();;
 
     useEffect(() => {
-        getUsers();
+       findAllClientes()
     }, []);
-    
+    const findAllClientes = async()=>{
+        const respueta = await clienteFindAll();
+        console.log(respueta);
+        
+        setCliente(respueta.data);
+    }
     return (
         <>
 
             {!visibleForm ||
                 <UserModalForm />}
             <div className="container my-4">
-                <h2>Users App</h2>
+                <h2>Secretario virtual</h2>
                 <div className="row">
                     <div className="col">
                         {/*(visibleForm || !login.isAdmin) || <button
@@ -37,12 +44,13 @@ export const UsersPage = () => {
 <button
                             className="btn btn-primary my-2"
                             onClick={handlerOpenForm}>
-                            Nuevo Usuario
+                            Nuevo CLiente
                         </button>
                         {
-                            users.length === 0
-                                ? <div className="alert alert-warning">No hay usuarios en el sistema!</div>
-                                : <UsersList />
+                            cliente.length === 0
+                                ? <div className="alert alert-warning">No hay clientes en el sistema!</div>
+                                : <UsersList
+                                clientes={cliente} />
                         }
                     </div>
                 </div>
